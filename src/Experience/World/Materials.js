@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import Experience from '../Experience'
+import vertexShader from './shaders/videoText/vertex.glsl'
+import fragmentShader from './shaders/videoText/fragment.glsl'
 // import { SubsurfaceScatteringShader } from 'three/examples/jsm/shaders/SubsurfaceScatteringShader.js';
 
 
@@ -224,25 +226,76 @@ export default class Materials
         //testing
         this.videoCarousel = []
 
+        // let videotexture = new THREE.VideoTexture(videodom[0]);
+        // videotexture.minFilter = THREE.LinearFilter;
+        // videotexture.magFilter = THREE.LinearFilter;
+        // var mychromavideotexturematerial = getChromaKeyShaderMaterial(videotexture, new THREE.Color("rgb(0, 255, 0)"));
 
-        this.video1 =  new THREE.MeshBasicMaterial({
-            color: 0xFFFFFF,
-            map: this.resources.items.burgers1
-        })
-        this.video2 =  new THREE.MeshBasicMaterial({
-            color: 0xFFFFFF,
-            map: this.resources.items.burgers2
-        })
-        this.video3 =  new THREE.MeshBasicMaterial({
-            color: 0xFFFFFF,
-            map: this.resources.items.burgers3
-        })
+///======================
+  
+
+
+
+
+        // this.video1 =  new THREE.MeshBasicMaterial({
+        //     color: 0xFFFFFF,
+        //     map: this.resources.items.burgers1
+        // })
+
+        this.video1 = this.getChromaKeyShaderMaterial(this.resources.items.burgers1, new THREE.Color("rgb(0, 0, 255)"))
+        this.video2 = this.getChromaKeyShaderMaterial(this.resources.items.burgers2, new THREE.Color("rgb(0, 0, 255)"))
+        this.video3 = this.getChromaKeyShaderMaterial(this.resources.items.burgers3, new THREE.Color("rgb(0, 0, 255)"))
+        this.video4 = this.getChromaKeyShaderMaterial(this.resources.items.burgers4, new THREE.Color("rgb(0, 0, 255)"))
+        this.video5 = this.getChromaKeyShaderMaterial(this.resources.items.burgers5, new THREE.Color("rgb(0, 0, 255)"))
+        for ( let i = 0; i < Object.keys(this.resources.video).length; i ++ ) {
+            this.resources.video[Object.keys(this.resources.video)[i]].play()
+        }
+        
+        // this.video2 =  new THREE.MeshBasicMaterial({
+        //     color: 0xFFFFFF,
+        //     map: this.resources.items.burgers2
+        // })
+        // this.video3 =  new THREE.MeshBasicMaterial({
+        //     color: 0xFFFFFF,
+        //     map: this.resources.items.burgers3
+        // })
+        // this.video4 =  new THREE.MeshBasicMaterial({
+        //     color: 0xFFFFFF,
+        //     map: this.resources.items.burgers4
+        // })
+        // this.video5 =  new THREE.MeshBasicMaterial({
+        //     color: 0xFFFFFF,
+        //     map: this.resources.items.burgers5
+        // })
         
         this.videoCarousel.push(this.video1)
         this.videoCarousel.push(this.video2)
         this.videoCarousel.push(this.video3)
+        this.videoCarousel.push(this.video4)
+        this.videoCarousel.push(this.video5)
 
     }
+    getChromaKeyShaderMaterial(texture, color) {
+        return new THREE.ShaderMaterial({
+          transparent: true,
+          uniforms: {
+            map: {
+              value: texture
+            },
+            keyColor: {
+              value: color.toArray()
+            },
+            similarity: {
+              value: 0.01
+            },
+            smoothness: {
+              value: 0.0
+            }
+          },
+          vertexShader: vertexShader,
+          fragmentShader: fragmentShader
+        });
+      }
     
     // setShadersMaterial()
     // {

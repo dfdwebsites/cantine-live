@@ -47,7 +47,7 @@ export default[
     {
         name: 'signModel',
         type: 'gltfModel',
-        path: 'models/sign.glb'
+        path: 'models/signs.glb'
     },
     {
         name: 'matCapSilver',
@@ -88,6 +88,16 @@ export default[
         name: 'burgers3',
         type: 'videoTexture',
         path: 'textures/burger3.mp4'
+    },
+    {
+        name: 'burgers4',
+        type: 'videoTexture',
+        path: 'textures/burger4.mp4'
+    },
+    {
+        name: 'burgers5',
+        type: 'videoTexture',
+        path: 'textures/burger5.mp4'
     }
 
 ]

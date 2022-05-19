@@ -5,7 +5,7 @@ export default class Stats
     constructor(_active)
     {
         this.instance = new StatsJs()
-        this.instance.showPanel(0)
+        this.instance.showPanel(2)
 
         this.active = false
         this.max = 40

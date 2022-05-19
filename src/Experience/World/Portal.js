@@ -91,8 +91,10 @@ export default class Portal
 
         this.justWhite =  this.resources.items.cantineModel.scene.children.find((child=> child.name === 'justWhite'))
         this.justWhite.material = new THREE.MeshBasicMaterial({color:0xFFFFFF})
+        console.log(this.resources.items.signModel)
 
-        this.signWhite =  this.resources.items.signModel.scene.children.find((child=> child.name === 'signWhite'))
+        // this.signWhite =  this.resources.items.signModel.scene.children.find((child=> child.name === 'signWhite'))
+        this.signWhite =  this.resources.items.signModel.scene.children.find((child=> child.name === "signLogoWhite"))
         this.signWhite.material = new THREE.MeshBasicMaterial({color:0xFFFFFF})
 
         //tvs

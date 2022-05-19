@@ -144,7 +144,7 @@ export default class Camera
 
         this.camAngle.default = () =>
         {
-            this.controls.minDistance = 10
+            this.controls.minDistance = 8
             this.controls.maxDistance = 26
             this.controls.minAzimuthAngle = 0 
             this.controls.maxAzimuthAngle = Math.PI *1.9999
@@ -243,6 +243,7 @@ export default class Camera
                 this.transitions.credits(1.5)
                 await this.sleep(1500)
                 this.experience.world.logo.toCenter()
+                this.backToDefault.classList.add('fadeIn')
             }
         }
     }
