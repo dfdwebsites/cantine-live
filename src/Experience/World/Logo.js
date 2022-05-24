@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import gsap from 'gsap'
 import Experience from '../Experience.js'
-import { MeshBasicMaterial } from 'three'
 
 export default class Logo
 {
@@ -45,7 +44,7 @@ export default class Logo
         this.model.geometry = new THREE.PlaneGeometry(1, 1, 1, 1)
         this.model.geometry.rotateY(- Math.PI)
 
-        this.mate = new MeshBasicMaterial({wireframe:true,side:THREE.DoubleSide})
+        this.mate = new THREE.MeshBasicMaterial({wireframe:true,side:THREE.DoubleSide})
         this.linkArea = new THREE.Mesh(
             new THREE.PlaneBufferGeometry(0.3,0.4),
             this.mate)
@@ -64,8 +63,9 @@ export default class Logo
             map: this.model.texture
         })
 
-        this.exitArea = new THREE.Mesh(new THREE.PlaneBufferGeometry(5,5),this.mate)
+        this.exitArea = new THREE.Mesh(new THREE.PlaneBufferGeometry(8,5),this.mate)
         this.exitArea.position.z = -0.01
+        this.exitArea.position.x = -2
         this.exitArea.name = 'exitCredits'
         this.exitArea.layers.set(2)
         this.exitArea.visible = false

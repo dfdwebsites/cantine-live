@@ -27,12 +27,12 @@ export default[
     {
         name: 'detailsBaked',
         type: 'texture',
-        path: 'textures/details.jpg'
+        path: 'textures/finalDetails75.jpg'
     },
     {
         name: 'floorBaked',
         type: 'texture',
-        path: 'textures/floor2k.jpg'
+        path: 'textures/finalFloorBake.jpg'
     },
     {
         name: 'vespaBaked',
@@ -44,6 +44,18 @@ export default[
         type: 'gltfModel',
         path: 'models/camper.glb'
     },
+    ///testing
+    {
+        name: 'testAnim',
+        type: 'gltfModel',
+        path: 'models/testAnimis.glb'
+    },
+    {
+        name: 'bannerTexture',
+        type: 'texture',
+        path: 'textures/banner.jpg'
+    },
+    ///testing
     {
         name: 'signModel',
         type: 'gltfModel',

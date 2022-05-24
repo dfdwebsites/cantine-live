@@ -47,45 +47,6 @@ export default class PreLoader extends EventEmitter
         })
     }
     
-    // readyScreen()
-    // {
-    //     this.cooking.remove()
-    //     this.startButton.style.display = "inline"
-    //     this.startButton.classList.add('fadeIn')
-    //     this.startButton.addEventListener("click", async () => {
-
-    //         // Remove overlay and button
-    //         this.overlay.classList.add('fade')
-    //         this.startButton.classList.add('fadeOut')
-
-    //         window.setTimeout(() =>
-    //         {
-    //             this.startButton.remove()
-    //             this.overlay.remove()
-    //         }, 2000)
-
-    //         // // Trigger start events
-    //         // this.controller = this.experience.controller
-    //         // this.performance = this.experience.performance
-
-    //         // // Move Camera
-    //         this.camera.camControls.toDefault()
-    //         window.setTimeout(() =>
-    //         {
-    //             this.menu.style.display = "inline"
-    //             this.menu.classList.add('fadeIn')
-    //         }, 1500)
-
-    //         // // Required for instagram brower compatibility
-    //         // this.sizes.resize()
-            
-
-    //         // Emit Event
-    //         this.trigger('start')
-
-
-    //     },{ once: true });
-    // }
     start = async () => {
         this.cooking.remove()
         this.overlay.classList.add('fade')

@@ -144,7 +144,7 @@ export default class Camera
 
         this.camAngle.default = () =>
         {
-            this.controls.minDistance = 8
+            this.controls.minDistance = 9
             this.controls.maxDistance = 26
             this.controls.minAzimuthAngle = 0 
             this.controls.maxAzimuthAngle = Math.PI *1.9999
@@ -243,6 +243,20 @@ export default class Camera
                 this.transitions.credits(1.5)
                 await this.sleep(1500)
                 this.experience.world.logo.toCenter()
+                this.backToDefault.classList.add('fadeIn')
+            }
+        }
+        this.camControls.toBurgers = async () =>
+        {
+            
+            if (this.logic.buttonsLocked === false && this.logic.mode === 'car')
+            {
+                this.logic.mode = 'burgers'
+                window.location.hash = "#burgers"
+                this.logic.lockButtons(1500)
+                this.camAngle.unlocked()
+                this.transitions.burgers(1.5)
+                await this.sleep(1500)
                 this.backToDefault.classList.add('fadeIn')
             }
         }
@@ -371,6 +385,38 @@ export default class Camera
                     gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
                     x: 0.4,
                     y:2.45,
+                    z:0})
+
+                }
+            }
+            this.transitions.burgers = async (duration) =>
+            {
+                this.controls.enableRotate = false
+                this.controls.enableZoom = false
+                console.log(this.sizes.mode)
+                if(this.sizes.mode === 'bigScreen'){
+                    gsap.to(this.instance.position, { duration: duration, ease: "power1.inOut",
+                    x: -1.4,
+                    y:2.8,
+                    z:3})
+              
+                    gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
+                    x: -1.4,
+                    y:2.8,
+                    z:0})
+                    
+                   
+                }
+                else if(this.sizes.mode === 'smallScreen')
+                {
+                    gsap.to(this.instance.position, { duration: duration, ease: "power1.inOut",
+                    x: -1.4,
+                    y:2.8,
+                    z:3.4})
+              
+                    gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
+                    x: -1.4,
+                    y:2.8,
                     z:0})
 
                 }

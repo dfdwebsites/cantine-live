@@ -14,14 +14,13 @@ export default class World
         this.resources = this.experience.resources
         this.time = this.experience.time
         
-        // this.screen = new Screen()
+       
         this.resources.on('ready', ()=>
         {
                 //Setup
             this.setPortal()
             this.setLogo() 
             this.setDeliveryInfo()
-            // this.setScreens()
             
         })
     }
@@ -42,6 +41,10 @@ export default class World
         if(this.logo)
         {
             this.logo.update()
+        }
+        if(this.portal)
+        {
+            this.portal.update()
         }
     }
 

@@ -13,6 +13,7 @@ import PreLoader from './Preloader.js'
 import Raycaster from './Raycaster.js'
 
 
+
 //Create an instance of a class 
 let instance = null
 
@@ -103,8 +104,10 @@ export default class Experience
         this.camera.update()
         this.renderer.update()
         this.world.update()
+
         if(this.stats)
         this.stats.update()
+        
     }
     destroy()
     {

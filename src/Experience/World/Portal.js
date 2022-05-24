@@ -1,26 +1,19 @@
 import Experience from "../Experience";
 import * as THREE from 'three'
 
-// import vertexShader from './shaders/sign/vertex.glsl'
-// import fragmentShader from './shaders/sign/fragment.glsl'
-// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-
-
 export default class Portal
 {
 
     constructor()
     {
         this.experience = new Experience()
+        this.camera = this.experience.camera
         this.time = this.experience.time
         this.scene = this.experience.scene
         this.materials = this.experience.materials
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.logic = this.experience.rayCaster.logic
+        this.logic = this.camera.logic
         
         if (this.debug.active)
         {
@@ -39,6 +32,7 @@ export default class Portal
         if(this.resources.items.cantineModel){
             this.setModel()
             this.setScreen()
+            this.changingTvAnim()
         }
         
         
@@ -46,11 +40,21 @@ export default class Portal
 
     setModel()
     {
-        // const ENTIRE_SCENE = 0, BLOOM_SCENE = 1;
-
-		// const bloomLayer = new THREE.Layers();
-		// bloomLayer.set( BLOOM_SCENE )
+        //animation banner
+        this.bannerFront = this.resources.items.testAnim.scene.children.find((child=> child.name === 'banner'))
+        this.bannerFront.material = this.materials.bannerMat
+       
+        this.mixer = new THREE.AnimationMixer(this.resources.items.testAnim.scene)
+        this.clips = this.resources.items.testAnim.animations
         
+       
+        this.clip1 = THREE.AnimationClip.findByName(this.clips, "KeyAction")
+        this.action1 = this.mixer.clipAction(this.clip1)
+        
+        this.action1.play()
+        
+
+       
         //grouped meshes
         this.mergedFloor = this.resources.items.cantineModel.scene.children.find((child=> child.name === 'floor'))
 
@@ -60,7 +64,7 @@ export default class Portal
         this.mergedDetails = this.resources.items.cantineModel.scene.children.find((child=> child.name === 'details'))
 
         this.mergedVan = this.resources.items.cantineModel.scene.children.find((child)=> child.name==="cantine")
-        // this.mergedVan.layers.set(2)
+        
 
 
         //matCaps 
@@ -69,9 +73,8 @@ export default class Portal
         this.carGlass = this.resources.items.cantineModel.scene.children.find((child)=> child.name==="carGlass")
 
         this.silverMat = this.resources.items.cantineModel.scene.children.find((child)=> child.name==="silverMat")
-        
-        
 
+           
 
         //colorTextures
         this.frontLights =  this.resources.items.cantineModel.scene.children.find((child=> child.name === 'frontLights'))
@@ -91,7 +94,7 @@ export default class Portal
 
         this.justWhite =  this.resources.items.cantineModel.scene.children.find((child=> child.name === 'justWhite'))
         this.justWhite.material = new THREE.MeshBasicMaterial({color:0xFFFFFF})
-        console.log(this.resources.items.signModel)
+        
 
         // this.signWhite =  this.resources.items.signModel.scene.children.find((child=> child.name === 'signWhite'))
         this.signWhite =  this.resources.items.signModel.scene.children.find((child=> child.name === "signLogoWhite"))
@@ -127,71 +130,6 @@ export default class Portal
         this.deliverySign =  this.resources.items.cantineModel.scene.children.find((child=> child.name === 'deliverySign'))
         this.deliverySign.layers.set(1)
 
-        
-
-        
-        // const params = {
-        //     exposure: 1,
-        //     bloomStrength: 5,
-        //     bloomThreshold: 0,
-        //     bloomRadius: 0,
-        //     scene: 'Scene with Glow'
-        // };
-
-		// 	const renderScene = new RenderPass( this.scene, this.experience.camera );
-
-		// 	const bloomPass = new UnrealBloomPass( new THREE.Vector2( this.experience.sizes.width, this.experience.sizes.height), 1.5, 0.4, 0.85 );
-		// 	bloomPass.threshold = params.bloomThreshold;
-		// 	bloomPass.strength = params.bloomStrength;
-		// 	bloomPass.radius = params.bloomRadius;
-
-        //     const parameters = {
-		// 		minFilter: THREE.LinearFilter,
-		// 		magFilter: THREE.LinearFilter,
-		// 		format: THREE.RGBAFormat
-		// 	};
-
-
-		// 	const renderTarget = new THREE.WebGLRenderTarget( this.experience.sizes.width * this.experience.sizes.pixelRatio, this.experience.sizes.height * this.experience.sizes.pixelRatio, parameters );
-		// 	renderTarget.texture.name = 'EffectComposer.rt1';
-
-		// 	const bloomComposer = new EffectComposer( this.experience.renderer, renderTarget );
-		// 	bloomComposer.renderToScreen = false;
-		// 	bloomComposer.addPass( renderScene );
-		// 	bloomComposer.addPass( bloomPass );
-
-		// 	const finalPass = new ShaderPass(
-		// 		new THREE.ShaderMaterial( {
-		// 			uniforms: {
-		// 				baseTexture: { value: null },
-		// 				bloomTexture: { value: bloomComposer.renderTarget2.texture }
-		// 			},
-		// 			vertexShader: vertexShader,
-		// 			fragmentShader: fragmentShader,
-		// 			defines: {}
-		// 		} ), 'baseTexture'
-		// 	);
-		// 	finalPass.needsSwap = true;
-
-		// 	const finalComposer = new EffectComposer( this.experience.renderer );
-		// 	finalComposer.addPass( renderScene );
-		// 	finalComposer.addPass( finalPass );
-
-        if(this.debug.active)
-        {
-            // this.debugFolder
-            //     .add(pointLight.position, 'y')
-            //     .min(-10)
-            //     .max(10)
-            //     .step(0.001)
-            //     .name("y")
-            // this.debugFolder
-            //     .add(pointLight.position, 'z')
-            //     .min(-10)
-            //     .max(10)
-            //     .step(0.001)
-            //     .name("z")
-        }
 
 
 
@@ -222,17 +160,19 @@ export default class Portal
         this.silverMat.material = this.materials.silverMaterial
     
 
-        // this.resources.items.cantineModel.scene.position.y = - 2
-        // this.resources.items.signModel.scene.position.y = - 2
         
         this.scene.add(this.resources.items.cantineModel.scene)
         this.scene.add(this.resources.items.signModel.scene)
-        
-        // this.neon.enable(BLOOM_SCENE)
-        // renderBloom( true );
-        // finalComposer.render();
-						
+        this.scene.add(this.resources.items.testAnim.scene)
+ 
 
+    }
+    changingTvAnim()
+    {
+        setTimeout(()=>{
+            if(this.logic.mode==='car') this.changeVideoFunc()
+            this.changingTvAnim()
+        },9000)
     }
     changeTv()
     {
@@ -249,6 +189,18 @@ export default class Portal
 
     }
     changeVideo(){
+        if(this.logic.mode === 'car')
+        {
+            this.camera.camControls.toBurgers()
+            this.experience.world.logo.exitArea.layers.set(1)
+        }
+        else if(this.logic.mode ==='burgers')
+        {
+           this.changeVideoFunc()
+        }
+    }
+    changeVideoFunc()
+    {
         this.videoNum++
         if(this.videoNum>this.materials.videoCarousel.length - 1) this.videoNum = 0
         this.tv.material = this.materials.videoCarousel[this.videoNum]
@@ -257,6 +209,8 @@ export default class Portal
 
     update()
     {
+        if(this.action1)
+        this.mixer.update(this.time.delta * 0.0008)
     }
 
 

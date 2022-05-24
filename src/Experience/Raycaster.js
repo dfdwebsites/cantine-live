@@ -44,7 +44,7 @@ export default class Raycaster
         // credits
         this.objectsToTest.push( this.scene.creditSign )
         this.objectsToTest.push( this.scene.creditTv )
-        // this.objectsToTest.push( this.scene.mergedVan )
+        
         //burgers
         this.objectsToTest.push( this.scene.tv )
         //call
@@ -59,11 +59,12 @@ export default class Raycaster
             {
                 this.touchedPoints.push(event.pointerId)
 
-                this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1)*0.9)
-                this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1)*1.1)
+                //testing with bigger range for not that sensitive touch
+                this.cursorXMin = Math.abs((event.clientX / this.sizes.width * 2 - 1)*0.5) 
+                this.cursorXMax = Math.abs((event.clientX / this.sizes.width * 2 - 1)*1.6) 
 
-                this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1)*0.9)
-                this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1)*1.1)
+                this.cursorYMin = Math.abs((event.clientY / this.sizes.height * 2 - 1)*0.5) 
+                this.cursorYMax = Math.abs((event.clientY / this.sizes.height * 2 - 1)*1.6) 
 
             })
 
@@ -72,9 +73,9 @@ export default class Raycaster
                 this.cursor.x = event.clientX / this.sizes.width * 2 - 1
                 this.cursor.y = - (event.clientY / this.sizes.height) * 2 + 1
 
-                this.absX = Math.abs(this.cursor.x)
-                this.absY = Math.abs(this.cursor.y)
-
+                this.absX = Math.abs(this.cursor.x) 
+                this.absY = Math.abs(this.cursor.y) 
+                
                 if(this.touchedPoints.length === 1 && 
                 this.absX > this.cursorXMin && this.absX < this.cursorXMax &&
                 this.absY > this.cursorYMin && this.absY < this.cursorYMax) 
@@ -135,6 +136,11 @@ export default class Raycaster
                 }
                 
                 this.camera.camControls.toCredits()
+            }
+            if(this.selectedModel.name === 'exitCredits' && this.logic.buttonsLocked === false && this.logic.mode === 'burgers')
+            {
+                this.experience.world.logo.exitArea.layers.set(2)
+                this.camera.camControls.toDefault()
             }
 
             if(this.selectedModel.name === 'tel' && this.logic.mode === 'delivery')
