@@ -72,8 +72,8 @@ export default class Logo
 
 
         this.model.mesh = new THREE.Mesh(this.model.geometry, this.model.material)
-        this.model.mesh.scale.y = 0.3
-        this.model.mesh.scale.x = 0.3
+        this.model.mesh.scale.y = 0.25
+        this.model.mesh.scale.x = 0.25
         this.model.group.add(this.model.mesh, this.linkArea, this.exitArea)
 
         // Debug
@@ -128,8 +128,8 @@ export default class Logo
         this.animations.y = 0
 
         this.animations.limits = {}
-        this.animations.limits.z = { min: -0.30, max: 0.38 }
-        this.animations.limits.y = { min: -0.2, max: 0.18 }
+        this.animations.limits.z = { min: -0.27, max: 0.345 }
+        this.animations.limits.y = { min: -0.185, max: 0.165 }
 
         this.animations.speed = {}
         this.animations.speed.z = 0.00016

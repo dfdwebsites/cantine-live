@@ -152,7 +152,7 @@ export default class Raycaster
             if(this.selectedModel.name === 'link' && this.logic.mode === 'credits')
             {
 
-                window.open('https://dfdwebsites.netlify.app/', '');
+                window.open('https://www.dfdwebsites.com/', '');
             }
         }
     }
