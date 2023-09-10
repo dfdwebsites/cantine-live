@@ -70,7 +70,7 @@ h1 {
 .menu,
 .appLink {
   position: fixed;
-  font-size: 17px;
+  font-size: 18px;
   color: white;
   top: 10px;
   right: 15px;
@@ -80,35 +80,42 @@ h1 {
   padding: 1rem;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.4s;
+  pointer-events: none;
 }
 .menu:hover, .menu:focus, 
 .appLink:hover, .appLink:focus {
   background-color: rgba(255, 255, 255,  0.25);
 }
 .menu {
-  top: 76px;
+  right: auto;
+  left: 10px
 }
 .backToDefault {
   position: fixed;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
-  top: 5px;
-  left: 5px;
+  top: 10px;
+  left: 10px;
+  padding: 1rem;
   background-color: transparent;
-  border: none;
+  border: 1px solid white;
+  border-radius: 15px;
   cursor: pointer;
+  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s 0.4s;
 }
 
-.backToDefault.fadeIn,
-.menu.fadeIn,
-.appLink.fadeIn,
 .start.fadeIn {
   opacity: 1;
 }
-
+.menu.fadeIn,
+.appLink.fadeIn,
+.backToDefault.fadeIn {
+  pointer-events: all ;
+  opacity: 1;
+}
 .start.fadeOut {
   opacity: 0;
 }
@@ -573,13 +580,12 @@ p.burgerInfo {
   .menuBlock {
     width: 45%;
   }
-  .menu {
-    top: 10px;
-    right: 245px;
+  .backToDefault {
+    font-size: 30px;
   }
   .menu,
   .appLink {
-    font-size: 22px;
+    font-size: 24px;
   }
   .greekMenu,
   .ukMenu {
@@ -587,5 +593,11 @@ p.burgerInfo {
     flex-wrap: wrap;
     gap: 5%;
     margin-top: 100px;
+  }
+}
+@media (min-width: 950px) {
+  .menu {
+    left:auto;
+    right: 265px;
   }
 }

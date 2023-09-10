@@ -51,9 +51,9 @@ export default class PreLoader extends EventEmitter {
 
     this.camera.camControls.toDefault();
     window.setTimeout(() => {
-      this.menu.style.display = 'inline';
+      // this.menu.style.display = 'inline';
       this.menu.classList.add('fadeIn');
-      this.appLink.style.display = 'inline';
+      // this.appLink.style.display = 'inline';
       this.appLink.classList.add('fadeIn');
     }, 1500);
 

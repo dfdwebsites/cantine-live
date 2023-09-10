@@ -259,6 +259,8 @@ export default class Camera {
         this.transitions.default(1.5);
         await this.sleep(1500);
         this.camAngle.default();
+        this.appLink.classList.add("fadeIn")
+        this.menu.classList.add("fadeIn")
       }
     };
 
@@ -296,6 +298,8 @@ export default class Camera {
         this.transitions.delivery(1.5);
         await this.sleep(1500);
         this.backToDefault.classList.add('fadeIn');
+        this.appLink.classList.remove("fadeIn")
+        this.menu.classList.remove("fadeIn")
         if (this.logic.mode === 'delivery') this.instance.layers.enable(5);
       }
     };
@@ -309,6 +313,8 @@ export default class Camera {
         await this.sleep(1500);
         this.experience.world.logo.toCenter();
         this.backToDefault.classList.add('fadeIn');
+        this.appLink.classList.remove("fadeIn")
+        this.menu.classList.remove("fadeIn")
       }
     };
     this.camControls.toBurgers = async () => {
@@ -320,6 +326,8 @@ export default class Camera {
         this.transitions.burgers(1.5);
         await this.sleep(1500);
         this.backToDefault.classList.add('fadeIn');
+        this.appLink.classList.remove("fadeIn")
+        this.menu.classList.remove("fadeIn")
       }
     };
   }
